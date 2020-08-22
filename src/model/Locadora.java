@@ -99,7 +99,7 @@ public class Locadora {
     public Cliente[] ordenarClientesPeloNome () {
         int ordenado = 0;
         int index;
-        clientes = Arrays.copyOf(clientes, size());
+        clientes = Arrays.copyOf(clientes, size() + 1);
         while (ordenado < size()) {
             Cliente first = clientes[ordenado];
             if (clientes[ordenado] == null) {
@@ -161,7 +161,7 @@ public class Locadora {
     public Integer sizeFita () { return this.sizeFita; }
     public Fita removeFita(String titulo) {
         Fita fita = null;
-        fitas = Arrays.copyOf(fitas, sizeFita());
+        fitas = Arrays.copyOf(fitas, sizeFita() + 1);
         for (int i = 0; i < sizeFita(); i++) {
             if (fitas[i].getTitulo().equals(titulo)) {
                 fita = fitas[i];
