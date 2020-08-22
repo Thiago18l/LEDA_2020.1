@@ -23,15 +23,21 @@ class LocadoraTest {
     @Test
     void inserirClienteOrdenado() {
         Locadora locadora = new Locadora();
-        locadora.inserirClienteOrdenado(cliente);
-        locadora.inserirClienteOrdenado(cliente1);
         locadora.inserirClienteOrdenado(cliente2);
+        locadora.inserirClienteOrdenado(cliente1);
+        locadora.inserirClienteOrdenado(cliente);
         Cliente cl1 = locadora.getCliente(0);
         Cliente cl2 = locadora.getCliente(1);
         Cliente cl3 = locadora.getCliente(2);
         assertEquals(cliente.getNome(), cl1.getNome());
         assertEquals(cliente1.getNome(), cl2.getNome());
         assertEquals(cliente2.getNome(), cl3.getNome());
+    }
+    @Test void testOrdenarClientesPeloNome () {
+        Locadora locadora = new Locadora();
+        Cliente[] clientes = {cliente, cliente2, cliente1};
+        Cliente[] expected = {cliente, cliente1, cliente2};
+        assertArrayEquals(expected, locadora.ordenarClientesPeloNome(clientes));
     }
     @Test void removeCliente() {
         Locadora locadora = new Locadora();
