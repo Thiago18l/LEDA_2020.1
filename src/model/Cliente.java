@@ -2,24 +2,37 @@ package model;
 
 import java.util.*;
 
+
 public class Cliente {
 	private int pontosDeAlugadorFrequente = 0;
 	private double dividaTotal = 0.0;
+	private static Integer TAMANHO_DEFAULT = 10;
+	private Integer size = 0;
 	private String nome;
-	private Collection<Aluguel> fitasAlugadas = new ArrayList<Aluguel>();
+	private Aluguel dados[];
+
 
 	public Cliente(String nome) {
 		this.nome = nome;
+		dados = new Aluguel[TAMANHO_DEFAULT];
 	}
 
 	public String getNome() {
 		return nome;
 	}
-
-	public void adicionaAluguel(Aluguel aluguel) {
-		fitasAlugadas.add(aluguel);
+	public Integer getSize () {
+		return this.size;
 	}
-
+	public void adicionaAluguel(Aluguel aluguel) {
+		if (size == dados.length) {
+			aumentaArray();
+		}
+		dados[size++] = aluguel;
+	}
+	private void aumentaArray () {
+		int newLenght = dados.length * 2;
+		dados = Arrays.copyOf(dados, newLenght);
+	}
 	public int getPontosDeAlugadorFrequente() {
 		return pontosDeAlugadorFrequente;
 	}
@@ -29,26 +42,27 @@ public class Cliente {
 
 	public double extrato() {
 		double valorCorrente = 0.0;
-		for(Aluguel cada: fitasAlugadas) {
-		// determina valores para cada linha
-		valorCorrente += cada.calcularValor() ;
-		// trata de pontos de alugador frequente
-		pontosDeAlugadorFrequente += calcularPontosAlugadorFrequente(cada);
-
-		// mostra valores para este aluguel
-		dividaTotal += valorCorrente;
+		for (int i = 0; i < dados.length; i++) {
+			if (dados[i] == null) {
+				break;
+			}
+			valorCorrente += dados[i].calcularValor();
+			pontosDeAlugadorFrequente +=  calcularPontosAlugadorFrequente(dados[i]);
+			dividaTotal += valorCorrente;
 		}
 		return valorCorrente;
-		}
+	}
 	
 	public String mostraExtrato() {
 	    	
 	    	final String fimDeLinha = System.getProperty("line.separator");
 	        String resultado = "Registro de Alugueis de " + getNome() + fimDeLinha;	        
-	    	
-	    	for(Aluguel f : fitasAlugadas) {
-	    		resultado += "\t" + f.getFita().getTitulo() + "\t" + extrato() + fimDeLinha;    		
-	    	}
+	    	for (int i = 0; i < dados.length; i++) {
+	    		if (dados[i] == null) {
+	    			break;
+				}
+	    		resultado += "\t" + dados[i].getFita().getTitulo() + "\t" + extrato() + fimDeLinha;
+			}
 	    	
 	    	// adiciona rodape
 	    	resultado += "Valor total devido: " + dividaTotal + fimDeLinha;        

@@ -24,20 +24,20 @@ class FitaTest {
 	private static final int QUATRO_DIAS_ALUGADA = 4;
 	private static final int CINCO_DIAS_ALUGADA = 5;
 	
-	
+
 
 	@Test
 	void testeValor2Days() {
 		baby = new Fita("Baby Shark", new TipoInfantil());
 		assertEquals(1.5, baby.getValor(DOIS_DIAS_ALUGADA));
-		
+
 		//----------------------------- Teste Dois dias para Lançamento  -----------------------------
 		woman = new Fita("Mulher Maravilha", new TipoLancamento());
-		assertEquals(6 , woman.getValor(DOIS_DIAS_ALUGADA));
+		assertEquals(6, woman.getValor(DOIS_DIAS_ALUGADA));
 	}
 	@Test
 	void testeValor4Days() {
-		teletanbs = new Fita("Teletubs", new TipoInfantil());
+		teletanbs = new Fita("Teletanbs", new TipoInfantil());
 		assertEquals(3.0, teletanbs.getValor(QUATRO_DIAS_ALUGADA));
 	}
 	@Test

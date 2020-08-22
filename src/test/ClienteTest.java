@@ -15,20 +15,13 @@ import model.TipoNormal;
 
 
 class ClienteTest {
-	Fita teletanbs;
-	Fita baby;
-    Fita coringa;
-    Fita woman;
-    Fita loboW;
-	
-    @Before
-	void criarFitasTeste() {
-		baby = new Fita("Baby Shark", new TipoInfantil());
-        teletanbs = new Fita("Teletubs", new TipoInfantil());
-        coringa = new Fita("Coringa",new TipoLancamento());
-        woman = new Fita("Mulher Maravilha", new TipoLancamento());
-        loboW = new Fita("Lobo de Wall Street",new TipoNormal());
-	}
+
+
+    Fita baby = new Fita("Baby Shark", new TipoInfantil());
+    Fita teletanbs = new Fita("Teletubs", new TipoInfantil());
+    Fita coringa = new Fita("Coringa",new TipoLancamento());
+    Fita woman = new Fita("Mulher Maravilha", new TipoLancamento());
+    Fita loboW = new Fita("Lobo de Wall Street",new TipoNormal());
 
 	@Test
 	void testExtrato() {
@@ -42,8 +35,7 @@ class ClienteTest {
         cliente2.adicionaAluguel(alugado4);
 		
 		assertEquals(cliente2.getNome(),"Maria");
-//		assertEquals(cliente2.getAlugueis(), 2);
-//		assertEquals(cliente2.getPontosAlugadorFreq(), 3);
+		assertEquals(cliente2.getPontosDeAlugadorFrequente(), 0);
 	}
 
 }
