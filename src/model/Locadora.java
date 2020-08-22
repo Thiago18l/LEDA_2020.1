@@ -46,6 +46,7 @@ public class Locadora {
             aumentaTamanhoCliente();
         }
         clientes[this.size++] = cliente;
+        ordenarClientesPeloNome();
 
     }
     /**
@@ -53,7 +54,6 @@ public class Locadora {
      * novo.
      */
     private void aumentaTamanhoCliente () {
-
         int newSize = clientes.length * 2;
         clientes = Arrays.copyOf(clientes, newSize);
     }
@@ -97,9 +97,10 @@ public class Locadora {
         return clientes;
     }
     public Cliente[] ordenarClientesPeloNome () {
-        int ordenado = 1;
+        int ordenado = 0;
         int index;
-        while (ordenado > 0) {
+        clientes = Arrays.copyOf(clientes, size());
+        while (ordenado < size()) {
             Cliente first = clientes[ordenado];
             if (clientes[ordenado] == null) {
                 break;
@@ -160,6 +161,7 @@ public class Locadora {
     public Integer sizeFita () { return this.sizeFita; }
     public Fita removeFita(String titulo) {
         Fita fita = null;
+        fitas = Arrays.copyOf(fitas, sizeFita());
         for (int i = 0; i < sizeFita(); i++) {
             if (fitas[i].getTitulo().equals(titulo)) {
                 fita = fitas[i];
