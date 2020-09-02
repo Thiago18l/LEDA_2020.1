@@ -2,6 +2,7 @@ package test;
 
 import model.*;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.LowerCase;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -143,5 +144,19 @@ class LocadoraTest {
         Aluguel[] expected = {aluguel1, aluguel3, aluguel2};
         assertArrayEquals(expected, locadora.ordenarAlugueisSelectionSortPorValor());
         assertEquals(3, locadora.sizeAlugueis());
+    }@Test
+    void ordenarFitasMergeSortPorValor () {
+        Locadora locadora = new Locadora();
+        Fita [] actual = {baby, wonderful_woman, wolf_of_wall_street};
+        Fita [] expected = {baby, wolf_of_wall_street, wonderful_woman};
+        locadora.ordenarFitasMergeSortPorValor(actual);
+        assertArrayEquals(expected, actual);
+    }@Test
+    void ordenarFitasQuickSortPorValor() {
+        Locadora locadora = new Locadora();
+        Fita [] actual = {baby, wonderful_woman, wolf_of_wall_street};
+        Fita [] expected = {baby, wolf_of_wall_street, wonderful_woman};
+        locadora.ordenarFitasQuickSortPorValor(actual, 0, 2);
+        assertArrayEquals(expected, actual);
     }
 }
