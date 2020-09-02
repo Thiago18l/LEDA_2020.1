@@ -146,6 +146,66 @@ public class Locadora {
     }
 
     // Metodos para Fita
+    public Fita[] ordenarFitasMergeSortPorValor(Fita [] fitas) {
+        Integer length = fitas.length;
+        if (length < 2) {
+            return fitas;
+        }
+        int mid = length / 2;
+        Fita [] esquerda = new Fita[mid];
+        Fita [] direita = new Fita[length - mid];
+        for (int i = 0; i < mid; i++){
+            esquerda[i] = fitas[i];
+        }
+        for (int i = mid; i < length; i++) {
+            direita[i - mid] = fitas[i];
+        }
+        ordenarFitasMergeSortPorValor(esquerda);
+        ordenarFitasMergeSortPorValor(direita);
+
+        merge(fitas, esquerda, direita, mid, length - mid);
+        return fitas;
+    }
+    private void merge(Fita[] fita, Fita[] esquerda, Fita[] direita, Integer left, Integer right) {
+        int i = 0, j = 0, k = 0;
+        while (i < left && j < right) {
+            if (esquerda[i].getValor(1) <= direita[i].getValor(1)) {
+                fita[k++] = esquerda[i++];
+            } else {
+                fita[k++] = direita[j++];
+            }
+        }
+        while (i < left) {
+            fita[k++] = esquerda[i++];
+        }
+        while (j < right) {
+            fita[k++] = direita[j++];
+        }
+    }
+    public Fita[] ordenarFitasQuickSortPorValor(Fita[] fitas, int begin, int end) {
+        if (begin < end) {
+            int index = particao(fitas, begin, end);
+            ordenarFitasQuickSortPorValor(fitas, begin, index - 1);
+            ordenarFitasQuickSortPorValor(fitas, index + 1, end);
+        }
+        return fitas;
+    }
+    private int particao(Fita[] fita, int begin, int end) {
+        double pivot = fita[end].getValor(1);
+        int i = (begin - 1);
+        for (int j = begin; j < end; j++) {
+            if (fita[j].getValor(1) <= pivot) {
+                i++;
+                Fita troca = fita[i];
+                fita[i] = fita[j];
+                fita[j] = troca;
+            }
+        }
+        Fita troca = fita[i+1];
+        fita[i+1] = fita[end];
+        fita[end] = troca;
+        return i+1;
+    }
     public Fita getFita (Integer index) {
         if (index>= sizeFita || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index + ", de Tamanho: " + index);
