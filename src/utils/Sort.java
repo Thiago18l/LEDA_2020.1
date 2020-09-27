@@ -357,5 +357,72 @@ public class Sort {
 
         return i + 1;
     }
+    public void heapSortOcorrencias(Password[] arr){
+        int n = arr.length;
 
+        for (int i = n / 2 - 1; i >= 0; i--)
+            heapifyOcorrencias(arr, n, i);
+
+        for (int i=n-1; i>0; i--) {
+            Password temp = arr[0];
+            arr[0] = arr[i];
+            arr[i] = temp;
+
+            heapifyOcorrencias(arr, i, 0);
+        }
+    }
+
+    public void heapifyOcorrencias(Password[] arr, int n, int i) {
+        int largest = i; // Initialize largest as root
+        int l = 2*i + 1; // left = 2*i + 1
+        int r = 2*i + 2; // right = 2*i + 2
+
+        if (l < n && arr[l].getOcorrencia()  > arr[largest].getOcorrencia()) {
+            largest = l;
+        }
+        if (r < n && arr[r].getOcorrencia()  > arr[largest].getOcorrencia()) {
+            largest = r;
+        }
+        if (largest != i){
+            Password swap = arr[i];
+            arr[i] = arr[largest];
+            arr[largest] = swap;
+
+            heapifyOcorrencias(arr, n, largest);
+        }
+    }
+    public void heapSortAlfabetico(Password[] arr){
+        int n = arr.length;
+
+        for (int i = n / 2 - 1; i >= 0; i--)
+            heapifyAlfabetico(arr, n, i);
+
+        for (int i=n-1; i>0; i--) {
+            Password temp = arr[0];
+            arr[0] = arr[i];
+            arr[i] = temp;
+
+            heapifyAlfabetico(arr, i, 0);
+        }
+    }
+
+    void heapifyAlfabetico(Password[] arr, int n, int i) {
+        int largest = i; // Initialize largest as root
+        int l = 2*i + 1; // left = 2*i + 1
+        int r = 2*i + 2; // right = 2*i + 2
+
+        if (l < n && arr[l].getPassword().compareTo(arr[largest].getPassword()) > 0) {
+            largest = l;
+        }
+        if (r < n && arr[r].getPassword().compareTo(arr[largest].getPassword()) > 0) {
+            largest = r;
+        }
+        if (largest != i){
+            Password swap = arr[i];
+            arr[i] = arr[largest];
+            arr[largest] = swap;
+
+            heapifyAlfabetico(arr, n, largest);
+        }
+    }
 }
