@@ -79,9 +79,5 @@ public class Store {
     public Password[] getData() {
         return this.data;
     }
-    private void swap(Password[] senhas, int max, int size) {
-        Password small = senhas[max];
-        senhas[max] = senhas[size];
-        senhas[size] = small;
-    }
+
 }

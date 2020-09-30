@@ -2,3 +2,8 @@
 out
 *.iml
 *.txt
+.metadata
+.classpath
+.project
+
+/bin/
