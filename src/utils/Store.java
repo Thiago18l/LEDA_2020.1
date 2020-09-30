@@ -1,7 +1,9 @@
 package utils;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
@@ -52,6 +54,18 @@ public class Store {
             e.printStackTrace();
         }
     }
+    public void WriteFile (String output, Password[] passwords) {
+    	try (BufferedWriter bw = new BufferedWriter(new FileWriter(output))) {
+    		String line = "";
+    		for (int i = 0; i < passwords.length; i++) {
+    			line = passwords[i].getLength() + " " + passwords[i].getOcorrencia() + " " + passwords[i].getPassword();
+    			bw.write(line + '\n');
+    		}
+    	} catch (Exception e) {
+    		System.out.println(e.getMessage());
+    	}
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
