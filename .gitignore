@@ -1,7 +1,6 @@
 .idea
 out
 *.iml
-*.txt
 .metadata
 .classpath
 .project
